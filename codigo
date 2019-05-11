@@ -1,0 +1,197 @@
+#include <stdio.h>
+#include <string.h>
+
+int num_ticket(void);
+void info(int num, int pre);
+int valid_campo(int cant);
+int valid_palco(int cant);
+int valid_platea(int cant);
+
+int main(){
+	
+	char ubi[5];
+	int dia;
+	int numero, valid;
+	char fin='n';
+	int precio, ventas=0, total=0;
+	int cantcam1=0, cantcam2=0, cantcam3=0, cantpla1=0, cantpla2=0, cantpla3=0, cantpco1=0, cantpco2=0, cantpco3=0;
+	
+	while (fin != 's'){
+		printf("\nIngrese 'cam', 'pla' o 'pco' para indicar ubicacion: ");
+		fflush(stdin);
+		scanf("%s", ubi);
+		printf("\nIngrese nro de dia: ");
+		fflush(stdin);
+		scanf("%d", &dia);
+		
+		if(strcmp(ubi, "cam")==0){
+			precio=60;
+			switch(dia){
+				case 1:
+					valid = valid_campo(cantcam1);
+					if(valid==1){
+						break;}else{
+							numero=num_ticket();
+							info(numero, precio);
+							cantcam1++;
+							ventas++;
+							total+=precio;
+						}
+					break;
+				case 2:
+					valid = valid_campo(cantcam2);
+					if(valid==1){
+						break;}else{
+							numero=num_ticket();
+							info(numero, precio);
+							cantcam2++;
+							ventas++;
+							total+=precio;
+						}
+					break;
+				case 3:
+					valid = valid_campo(cantcam3);
+					if(valid==1){
+						break;}else{
+							numero=num_ticket();
+							info(numero, precio);
+							cantcam3++;
+							ventas++;
+							total+=precio;
+						}
+					break;
+				}
+				
+		}else{if(strcmp(ubi, "pla")==0){
+				precio=80;
+				switch(dia){
+					case 1:
+						valid = valid_platea(cantpla1);
+						if(valid==1){
+							break;}else{
+								numero=num_ticket();
+								info(numero, precio);
+								cantpla1++;
+								ventas++;
+								total+=precio;
+							}
+						break;
+					case 2:
+						valid = valid_platea(cantpla2);
+						if(valid==1){
+							break;}else{
+								numero=num_ticket();
+								info(numero, precio);
+								cantpla2++;
+								ventas++;
+								total+=precio;
+							}
+						break;
+					case 3:
+						valid = valid_platea(cantpla3);
+						if(valid==1){
+							break;}else{
+								numero=num_ticket();
+								info(numero, precio);
+								cantpla3++;
+								ventas++;
+								total+=precio;
+							}
+						break;
+					}
+				}else{if(strcmp(ubi, "pco")==0){
+						precio=120;
+						switch(dia){
+							case 1:
+								valid = valid_palco(cantpco1);
+								if(valid==1){
+									break;}else{
+										numero=num_ticket();
+										info(numero, precio);
+										cantpco1++;
+										ventas++;
+										total+=precio;
+									}
+									break;
+							case 2:
+								valid = valid_palco(cantpco2);
+								if(valid==1){
+									break;}else{
+										numero=num_ticket();
+										info(numero, precio);
+										cantpco2++;
+										ventas++;
+										total+=precio;
+									}
+								break;
+							case 3:
+								valid = valid_palco(cantpco3);
+								if(valid==1){
+									break;}else{
+										numero=num_ticket();
+										info(numero, precio);
+										cantpco3++;
+										ventas++;
+										total+=precio;
+									}
+								break;
+							}
+						}
+					}
+			
+			}
+		
+		printf("\nPresione una tecla para continuar o 's' para terminar: ");
+		fflush(stdin);
+		scanf("%c", &fin);
+	}
+	
+	printf("\nCantidad de entradas vendidas: %d", ventas);
+	printf("\nTotal recaudado: %d", total);
+	
+	return 0;
+}
+
+int num_ticket(void){
+	static int num=0;
+	num++;
+	return num;
+}
+
+int valid_campo(int cant){
+	int val;
+	if(cant>=3){
+		printf("\nNo quedan entradas.");
+		val=1;
+		}else{
+		val=0;
+		}
+	return val;
+}
+
+int valid_platea(int cant){
+	int val;
+	if(cant>=2){
+		printf("\nNo quedan entradas.");
+		val=1;
+		}else{
+		val=0;
+		}
+	return val;
+}
+
+int valid_palco(int cant){
+	int val;
+	if(cant>=1){
+		printf("\nNo quedan entradas.");
+		val=1;
+		}else{
+		val=0;
+		}
+	return val;
+}
+	
+void info(int num, int pre){
+	printf("\nSu numero de ticket es: %d.\nEl costo es de: $%d", num, pre);
+	return;
+}
